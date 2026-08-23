@@ -1,0 +1,291 @@
+﻿@model List<CruiseGraphExplorer.Models.RouteResult>
+
+@{
+	ViewData["Title"] = "Route Explorer";
+}
+
+<div class="page-header">
+
+	<div>
+
+		<a asp-controller="Cruise"
+		   asp-action="Index"
+		   class="back-link">
+			← Back to Cruise Lines
+		</a>
+
+		<span class="eyebrow">GRAPH TRAVERSAL</span>
+
+		<h1>Route Explorer</h1>
+
+		<p class="page-description">
+			Discover connected destination paths using graph traversal.
+		</p>
+
+	</div>
+
+</div>
+
+
+<div class="route-search-card">
+
+	<div class="route-search-header">
+
+		<div>
+
+			<h2>Find a Route</h2>
+
+			<p>
+				Select the starting and ending destinations.
+			</p>
+
+		</div>
+
+	</div>
+
+
+	<form asp-controller="Cruise"
+		  asp-action="Routes"
+		  method="get"
+		  class="route-form">
+
+		<div class="form-group">
+
+			<label for="startDestination">
+				From
+			</label>
+
+			<select id="startDestination"
+					name="startDestination"
+					required>
+
+				<option value="">
+					Select starting destination
+				</option>
+
+				<option value="miami">
+					Miami
+				</option>
+
+				<option value="nassau">
+					Nassau
+				</option>
+
+				<option value="cozumel">
+					Cozumel
+				</option>
+
+				<option value="ocean-cay">
+					Ocean Cay
+				</option>
+
+				<option value="san-juan">
+					San Juan
+				</option>
+
+				<option value="st-thomas">
+					St. Thomas
+				</option>
+
+				<option value="costa-maya">
+					Costa Maya
+				</option>
+
+				<option value="key-west">
+					Key West
+				</option>
+
+			</select>
+
+		</div>
+
+
+		<div class="route-arrow">
+			→
+		</div>
+
+
+		<div class="form-group">
+
+			<label for="endDestination">
+				To
+			</label>
+
+			<select id="endDestination"
+					name="endDestination"
+					required>
+
+				<option value="">
+					Select destination
+				</option>
+
+				<option value="miami">
+					Miami
+				</option>
+
+				<option value="nassau">
+					Nassau
+				</option>
+
+				<option value="cozumel">
+					Cozumel
+				</option>
+
+				<option value="ocean-cay">
+					Ocean Cay
+				</option>
+
+				<option value="san-juan">
+					San Juan
+				</option>
+
+				<option value="st-thomas">
+					St. Thomas
+				</option>
+
+				<option value="costa-maya">
+					Costa Maya
+				</option>
+
+				<option value="key-west">
+					Key West
+				</option>
+
+			</select>
+
+		</div>
+
+
+		<button type="submit"
+				class="btn btn-primary route-button">
+
+			Find Routes
+
+		</button>
+
+	</form>
+
+</div>
+
+
+@if (Model != null && Model.Count > 0)
+{
+	<section class="route-results">
+
+		<div class="section-header">
+
+			<div>
+
+				<span class="eyebrow">
+					RESULTS
+				</span>
+
+				<h2>
+					Available Routes
+				</h2>
+
+				<p>
+					Found @Model.Count route(s) through the graph.
+				</p>
+
+			</div>
+
+		</div>
+
+
+		<div class="route-list">
+
+			@foreach (var route in Model)
+			{
+				<div class="route-card">
+
+					<div class="route-card-header">
+
+						<span class="route-number">
+							Route
+						</span>
+
+						<span class="hop-badge">
+							@route.Hops hop(s)
+						</span>
+
+					</div>
+
+
+					<div class="route-path">
+
+						@for (int i = 0;
+										i < route.Path.Count;
+										i++)
+						{
+							<div class="route-node">
+
+								<div class="node-dot"></div>
+
+								<span>
+									@route.Path[i]
+								</span>
+
+							</div>
+
+							@if (i < route.Path.Count - 1)
+							{
+								<div class="route-connection">
+									↓
+								</div>
+							}
+						}
+
+					</div>
+
+				</div>
+			}
+
+		</div>
+
+	</section>
+}
+else
+{
+	<div class="empty-state">
+
+		<div class="empty-icon">
+			↔
+		</div>
+
+		<h2>
+			No routes found
+		</h2>
+
+		<p>
+			Select two destinations to discover connected paths.
+		</p>
+
+	</div>
+}
+
+
+<div class="graph-query-info">
+
+	<div class="graph-query-icon">
+		◇
+	</div>
+
+	<div>
+
+		<h3>
+			How graph traversal works
+		</h3>
+
+		<p>
+			The application traverses CONNECTED_TO relationships
+			between Destination nodes to discover paths of multiple hops.
+		</p>
+
+		<code>
+			Destination → CONNECTED_TO → Destination
+		</code>
+
+	</div>
+
+</div>

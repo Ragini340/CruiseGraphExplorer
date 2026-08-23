@@ -1,0 +1,263 @@
+﻿@model CruiseGraphExplorer.Models.CruiseLineDetails
+
+@{
+	ViewData["Title"] = Model.CruiseLine.Name;
+}
+
+<div class="page-header">
+
+	<div>
+
+		<a asp-controller="Cruise"
+		   asp-action="Index"
+		   class="back-link">
+			← Back to Cruise Lines
+		</a>
+
+		<span class="eyebrow">CRUISE LINE</span>
+
+		<h1>@Model.CruiseLine.Name</h1>
+
+		<p class="page-description">
+			Explore ships and destinations connected to
+			@Model.CruiseLine.Name.
+		</p>
+
+	</div>
+
+	<a asp-controller="Cruise"
+	   asp-action="Routes"
+	   class="btn btn-primary">
+		Explore Routes
+	</a>
+
+</div>
+
+
+<div class="detail-summary">
+
+	<div class="summary-card">
+
+		<span class="summary-label">
+			Cruise Line
+		</span>
+
+		<strong>
+			@Model.CruiseLine.Name
+		</strong>
+
+	</div>
+
+	<div class="summary-card">
+
+		<span class="summary-label">
+			Country
+		</span>
+
+		<strong>
+			@Model.CruiseLine.Country
+		</strong>
+
+	</div>
+
+	<div class="summary-card">
+
+		<span class="summary-label">
+			Ships
+		</span>
+
+		<strong>
+			@Model.Ships.Count
+		</strong>
+
+	</div>
+
+	<div class="summary-card">
+
+		<span class="summary-label">
+			Destinations
+		</span>
+
+		<strong>
+			@Model.Destinations.Count
+		</strong>
+
+	</div>
+
+</div>
+
+
+<section class="content-section">
+
+	<div class="section-header">
+
+		<div>
+
+			<h2>Ships</h2>
+
+			<p>
+				Ships operated by @Model.CruiseLine.Name.
+			</p>
+
+		</div>
+
+	</div>
+
+
+	@if (Model.Ships == null || Model.Ships.Count == 0)
+	{
+		<div class="empty-state compact">
+
+			<h3>No ships found</h3>
+
+			<p>
+				No ships are currently connected to this cruise line.
+			</p>
+
+		</div>
+	}
+	else
+	{
+		<div class="ship-grid">
+
+			@foreach (var ship in Model.Ships)
+			{
+				<div class="ship-card">
+
+					<div class="ship-icon">
+						🚢
+					</div>
+
+					<div>
+
+						<h3>
+							@ship.Name
+						</h3>
+
+						<div class="ship-details">
+
+							<div>
+								<span>Capacity</span>
+								<strong>
+									@ship.Capacity.ToString("N0")
+								</strong>
+							</div>
+
+							<div>
+								<span>Year Built</span>
+								<strong>
+									@ship.YearBuilt
+								</strong>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			}
+
+		</div>
+	}
+
+</section>
+
+
+<section class="content-section">
+
+	<div class="section-header">
+
+		<div>
+
+			<h2>Destinations</h2>
+
+			<p>
+				Destinations served by the cruise line's ships.
+			</p>
+
+		</div>
+
+	</div>
+
+
+	@if (Model.Destinations == null ||
+		Model.Destinations.Count == 0)
+	{
+		<div class="empty-state compact">
+
+			<h3>No destinations found</h3>
+
+			<p>
+				No destinations are currently connected.
+			</p>
+
+		</div>
+	}
+	else
+	{
+		<div class="destination-grid">
+
+			@foreach (var destination in Model.Destinations)
+			{
+				<div class="destination-card">
+
+					<div class="destination-icon">
+						📍
+					</div>
+
+					<div>
+
+						<h3>
+							@destination.Name
+						</h3>
+
+						<p>
+							@destination.Country
+						</p>
+
+						<span class="region">
+							@destination.Region
+						</span>
+
+					</div>
+
+				</div>
+			}
+
+		</div>
+	}
+
+</section>
+
+
+<div class="graph-explanation">
+
+	<div class="graph-explanation-icon">
+		◎
+	</div>
+
+	<div>
+
+		<h3>Graph Relationship</h3>
+
+		<p>
+			This page demonstrates the relationship traversal:
+		</p>
+
+		<div class="relationship-flow">
+
+			<span>Cruise Line</span>
+
+			<span>→ OPERATES →</span>
+
+			<span>Ship</span>
+
+			<span>→ SAILS_TO →</span>
+
+			<span>Destination</span>
+
+		</div>
+
+	</div>
+
+</div>

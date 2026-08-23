@@ -1,0 +1,27 @@
+﻿{
+    "$schema": "http://json.schemastore.org/launchsettings.json",
+
+    "profiles": {
+        "https": {
+            "commandName": "Project",
+
+            "dotnetRunMessages": true,
+
+            "launchBrowser": true,
+
+            "launchUrl": "",
+
+            "applicationUrl": "https://localhost:7043;http://localhost:5043",
+
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+
+                "COGNODB_URI": "bolt+s://db-ed3381e6.bravo.databases.cognodb.com",
+
+                "COGNODB_USER": "cognodb",
+
+                "COGNODB_PASSWORD": "Your password" //I am removing the actual password from the launchSettings.json file after testing and before committing the code to Git, for security reasons.
+            }
+        }
+    }
+}

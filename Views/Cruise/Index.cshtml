@@ -1,0 +1,122 @@
+﻿@model List<CruiseGraphExplorer.Models.CruiseLine>
+
+@{
+	ViewData["Title"] = "Cruise Lines";
+}
+
+<div class="page-header">
+	<div>
+		<span class="eyebrow">CRUISEGRAPH EXPLORER</span>
+
+		<h1>Explore Cruise Lines</h1>
+
+		<p class="page-description">
+			Explore cruise lines, ships, destinations and relationships
+			powered by a graph database.
+		</p>
+	</div>
+
+	<a asp-controller="Cruise"
+	   asp-action="Routes"
+	   class="btn btn-primary">
+		Explore Routes
+	</a>
+</div>
+
+@if (TempData["ErrorMessage"] != null)
+{
+	<div class="alert alert-danger">
+		<strong>Unable to load data</strong>
+		<span>@TempData["ErrorMessage"]</span>
+	</div>
+}
+
+@if (Model == null || Model.Count == 0)
+{
+	<div class="empty-state">
+		<div class="empty-icon">○</div>
+
+		<h2>No cruise lines found</h2>
+
+		<p>
+			No cruise line data is currently available.
+			Please make sure CognoDB is connected and seeded.
+		</p>
+
+		<button type="button"
+				class="btn btn-primary"
+				onclick="location.reload()">
+			Try Again
+		</button>
+	</div>
+}
+else
+{
+	<div class="stats-row">
+		<div class="stat-card">
+			<span class="stat-label">Cruise Lines</span>
+			<strong>@Model.Count</strong>
+		</div>
+
+		<div class="stat-card">
+			<span class="stat-label">Graph Database</span>
+			<strong>CognoDB</strong>
+		</div>
+
+		<div class="stat-card">
+			<span class="stat-label">Query Language</span>
+			<strong>Cypher</strong>
+		</div>
+	</div>
+
+	<div class="section-header">
+		<div>
+			<h2>Cruise Lines</h2>
+			<p>Select a cruise line to explore its ships and destinations.</p>
+		</div>
+	</div>
+
+	<div class="cruise-grid">
+		@foreach (var cruiseLine in Model)
+		{
+			<div class="cruise-card">
+
+				<div class="cruise-card-icon">
+					🚢
+				</div>
+
+				<div class="cruise-card-content">
+
+					<h3>@cruiseLine.Name</h3>
+
+					<p class="country">
+						@cruiseLine.Country
+					</p>
+
+					<div class="card-actions">
+
+						<a asp-controller="Cruise"
+						   asp-action="Details"
+						   asp-route-id="@cruiseLine.Id"
+						   class="btn btn-primary">
+							Explore
+						</a>
+
+						@if (!string.IsNullOrWhiteSpace(cruiseLine.Website))
+						{
+							<a href="@cruiseLine.Website"
+							   target="_blank"
+							   rel="noopener noreferrer"
+							   class="btn btn-secondary">
+								Website
+							</a>
+						}
+
+					</div>
+
+				</div>
+
+			</div>
+		}
+	</div>
+}

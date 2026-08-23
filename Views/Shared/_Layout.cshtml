@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0" />
+
+	<title>
+		@ViewData["Title"] - CruiseGraph Explorer
+	</title>
+
+	<link rel="stylesheet"
+		  href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+	<link rel="stylesheet"
+		  href="~/css/site.css"
+		  asp-append-version="true" />
+
+</head>
+
+<body>
+
+	<header>
+
+		<nav class="navbar-custom">
+
+			<div class="navbar-container">
+
+				<a class="brand"
+				   asp-controller="Cruise"
+				   asp-action="Index">
+
+					<span class="brand-icon">
+						◇
+					</span>
+
+					<span>
+						CruiseGraph
+					</span>
+
+				</a>
+
+
+				<div class="nav-links">
+
+					<a asp-controller="Cruise"
+					   asp-action="Index">
+						Cruise Lines
+					</a>
+
+					<a asp-controller="Cruise"
+					   asp-action="Routes">
+						Route Explorer
+					</a>
+
+				</div>
+
+			</div>
+
+		</nav>
+
+	</header>
+
+
+	<main class="main-container">
+
+		@RenderBody()
+
+	</main>
+
+
+	<footer class="footer">
+
+		<div class="footer-container">
+
+			<div>
+				<strong>
+					CruiseGraph Explorer
+				</strong>
+
+				<span>
+					Graph-powered cruise discovery
+				</span>
+			</div>
+
+			<div>
+				Built with .NET 8 &amp; CognoDB
+			</div>
+
+		</div>
+
+	</footer>
+
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script src="~/js/site.js"
+			asp-append-version="true"></script>
+
+	@await RenderSectionAsync(
+	"Scripts",
+		required: false)
+
+</body>
+
+</html>
