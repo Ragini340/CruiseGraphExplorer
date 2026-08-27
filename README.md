@@ -906,7 +906,6 @@ The repository contains:
 - Cruise Line Explorer
 - Route Explorer
 
-A hosted demo and short screen recording can be added before final submission.
 
 ---
 
