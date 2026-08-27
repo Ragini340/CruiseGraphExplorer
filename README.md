@@ -459,7 +459,6 @@ Example:
 }
 ```
 
-Never commit real credentials to GitHub.
 
 ---
 
@@ -777,48 +776,6 @@ RETURN
 ORDER BY hops;
 ```
 
----
-
-# 22. Security
-
-The following information must never be committed to GitHub:
-
-```text
-COGNODB_URI
-COGNODB_PASSWORD
-```
-
-The repository should contain only configuration placeholders.
-
-Example:
-
-```text
-COGNODB_URI=<your-uri>
-COGNODB_USER=cognodb
-COGNODB_PASSWORD=<your-password>
-```
-
----
-
-# 23. Git Ignore
-
-The following should be excluded from source control:
-
-```gitignore
-.vs/
-bin/
-obj/
-*.user
-*.suo
-.env
-.env.*
-Properties/launchSettings.json
-```
-
-If `launchSettings.json` is used only for local development and contains real credentials, it should not be committed.
-
----
-
 # 24. Design Decisions
 
 ### Why ASP.NET Core MVC?
@@ -855,24 +812,6 @@ Environment variables allow the same application to run against different CognoD
 
 ---
 
-# 25. Future Improvements
-
-Potential future enhancements include:
-
-- Pagination for cruise lines and ships
-- Route visualization
-- Graph visualization using JavaScript
-- Additional cruise lines and ships
-- Search/filter functionality
-- Caching frequently accessed graph data
-- Automated integration tests
-- Health-check endpoint for CognoDB
-- Structured application logging
-- Hosted deployment
-- Authentication and authorization
-
----
-
 # 26. Conclusion
 
 CruiseGraph Explorer demonstrates how a graph database can be used to model and explore highly connected cruise data.
@@ -888,24 +827,6 @@ The application combines:
 - HTML/CSS/JavaScript
 
 The key graph capability is multi-hop destination traversal, which allows the application to answer relationship-oriented questions naturally.
-
----
-
-# 27. Assignment Deliverables
-
-The repository contains:
-
-- Full application source code
-- CognoDB schema script
-- Realistic seed data
-- Cypher queries
-- Graph data model
-- README documentation
-- Setup instructions
-- Environment-variable configuration
-- Cruise Line Explorer
-- Route Explorer
-
 
 ---
 
