@@ -925,39 +925,6 @@ The graph model can therefore grow naturally as the domain becomes richer.
 
 ---
 
-# 28. Testing Strategy
-
-Potential unit-test targets include:
-
-```text
-CruiseController
-CruiseGraphService
-Route validation
-Model mapping
-Error handling
-```
-
-Integration tests can verify:
-
-```text
-Application
-    |
-    v
-CognoDB
-```
-
-against a test graph dataset.
-
-Tests can verify:
-
-- Cruise lines are returned
-- Cruise line details are returned
-- Route traversal works
-- Empty results are handled
-- Invalid destination IDs are handled
-
----
-
 # 29. Maintainability
 
 The project follows separation of concerns:
