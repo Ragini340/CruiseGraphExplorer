@@ -1,0 +1,38 @@
+﻿<!-- 27 - DOM Implementation: Live Typing -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DOM</title>
+    <link rel="icon" href="logo.png" />
+</head>
+
+<body>
+
+    <h2>Live Typing</h2>
+
+    <label for="una">Username</label>
+    <br>
+
+    <input type="text" id="una" />
+    <br>
+
+    <h3 id="op">Hi Ragini</h3>
+
+    <script>
+        // Getting objects
+        const tb = document.getElementById("una");
+        const h = document.getElementById("op");
+
+        // Attaching event handler
+        tb.addEventListener("input", function() {
+
+            console.log(tb.value);
+
+            h.textContent = "Hi " + tb.value;
+        });
+    </script>
+
+</body>
+</html>
